@@ -1,6 +1,6 @@
 package com.esdc.lab1.command.impl;
 
-import com.esdc.lab1.client.HttpClientWrapper;
+import com.esdc.lab1.client.ApiHttpClient;
 import com.esdc.lab1.command.Command;
 import com.esdc.lab1.config.AppConfig;
 
@@ -8,9 +8,9 @@ import java.net.http.HttpResponse;
 import java.util.Scanner;
 
 public class DeleteCommand implements Command {
-    private final HttpClientWrapper client;
+    private final ApiHttpClient client;
 
-    public DeleteCommand(HttpClientWrapper client) {
+    public DeleteCommand(ApiHttpClient client) {
         this.client = client;
     }
 

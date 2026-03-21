@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class AppConfig {
+public final class AppConfig {
     private static final Properties props = new Properties();
 
     static {

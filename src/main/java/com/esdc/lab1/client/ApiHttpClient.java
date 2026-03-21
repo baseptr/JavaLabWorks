@@ -6,7 +6,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class HttpClientWrapper {
+import static java.net.http.HttpRequest.BodyPublishers.ofString;
+
+public class ApiHttpClient {
     private final HttpClient cl = HttpClient.newHttpClient();
 
     public HttpResponse<String> get(String url) throws IOException, InterruptedException {
@@ -21,7 +23,7 @@ public class HttpClientWrapper {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(body))
+                .POST(ofString(body))
                 .build();
         return cl.send(request, HttpResponse.BodyHandlers.ofString());
     }
@@ -30,7 +32,7 @@ public class HttpClientWrapper {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
-                .PUT(HttpRequest.BodyPublishers.ofString(body))
+                .PUT(ofString(body))
                 .build();
         return cl.send(request, HttpResponse.BodyHandlers.ofString());
     }

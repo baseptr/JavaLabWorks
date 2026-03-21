@@ -1,6 +1,6 @@
 package com.esdc.lab1.command.impl;
 
-import com.esdc.lab1.client.HttpClientWrapper;
+import com.esdc.lab1.client.ApiHttpClient;
 import com.esdc.lab1.command.Command;
 import com.esdc.lab1.config.AppConfig;
 
@@ -8,9 +8,9 @@ import java.net.http.HttpResponse;
 import java.util.Scanner;
 
 public class GetCommand implements Command {
-    private final HttpClientWrapper client;
+    private final ApiHttpClient client;
 
-    public GetCommand(HttpClientWrapper client) {
+    public GetCommand(ApiHttpClient client) {
         this.client = client;
     }
 
