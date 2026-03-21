@@ -1,0 +1,7 @@
+package com.esdc.lab1.entity;
+
+public record Todo(Integer userId,
+                   Integer id,
+                   String title,
+                   Boolean completed) {
+}
