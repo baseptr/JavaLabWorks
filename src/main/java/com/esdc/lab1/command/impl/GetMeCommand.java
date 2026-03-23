@@ -7,13 +7,12 @@ import com.esdc.lab1.entity.TelegramResponse;
 import com.esdc.lab1.entity.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Scanner;
 
+@Slf4j
 public class GetMeCommand implements Command {
-    private static final Logger log = LogManager.getLogger(GetMeCommand.class);
     private final ApiHttpClient client;
 
     public GetMeCommand(ApiHttpClient client) {
