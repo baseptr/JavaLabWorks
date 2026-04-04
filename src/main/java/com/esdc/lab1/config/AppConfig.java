@@ -8,11 +8,11 @@ public final class AppConfig {
     private static final Properties props = new Properties();
 
     static {
-        try (InputStream is = AppConfig.class.getClassLoader().getResourceAsStream("app.properties")) {
-            if (is == null) throw new RuntimeException("app.properties not found on classpath");
+        try (InputStream is = AppConfig.class.getClassLoader().getResourceAsStream("com/esdc/lab1/lab1.properties")) {
+            if (is == null) throw new RuntimeException("lab1.properties not found on classpath");
             props.load(is);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load app.properties", e);
+            throw new RuntimeException("Failed to load lab1.properties", e);
         }
     }
 

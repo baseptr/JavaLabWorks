@@ -5,8 +5,6 @@ import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.Properties;
 
 public class DataSourceProvider {
@@ -18,7 +16,7 @@ public class DataSourceProvider {
     public DataSourceProvider() {
         this.dbProperties = new Properties();
         try (InputStream input = getClass().getClassLoader()
-                .getResourceAsStream("db.properties")) {
+                .getResourceAsStream("com/esdc/lab2/db.properties")) {
             if (input == null) {
                 throw new IllegalStateException("db.properties not found in classpath");
             }

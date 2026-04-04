@@ -6,6 +6,21 @@ plugins {
 group = 'com.esdc'
 version = '1.0-SNAPSHOT'
 
+ext {
+    springVersion = '6.2.11'
+    springDataVersion = '3.4.1'
+    jacksonVersion = '2.21.1'
+    logbackVersion = '1.5.32'
+    slf4jVersion = '2.0.16'
+    lombokVersion = '1.18.44'
+    hikariVersion = '7.0.2'
+    postgresVersion = '42.7.10'
+    h2Version = '2.3.232'
+    junitVersion = '5.11.4'
+    mockitoVersion = '5.23.0'
+    jakartaVersion = '3.0.0'
+}
+
 repositories {
     mavenCentral()
 }
@@ -15,16 +30,39 @@ java {
     targetCompatibility = '25'
 }
 
+sourceSets {
+    main {
+        java {
+            exclude 'com/esdc/lab1/**'
+            exclude 'com/esdc/lab2/**'
+        }
+    }
+}
+
 dependencies {
-    implementation 'ch.qos.logback:logback-classic:1.5.32'
+    implementation "ch.qos.logback:logback-classic:${logbackVersion}"
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.21.1' //lab 1
+    //lab 1
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
 
-    compileOnly 'org.projectlombok:lombok:1.18.44' //lab 2
-    annotationProcessor 'org.projectlombok:lombok:1.18.44'
-    implementation 'com.zaxxer:HikariCP:7.0.2'
-    runtimeOnly 'org.postgresql:postgresql:42.7.10'
+    //lab 2
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    implementation "com.zaxxer:HikariCP:${hikariVersion}"
+    runtimeOnly "org.postgresql:postgresql:${postgresVersion}"
 
+    // lab 3
+    implementation "jakarta.annotation:jakarta.annotation-api:${jakartaVersion}"
+    implementation "org.springframework:spring-context:${springVersion}"
+    implementation "org.springframework:spring-beans:${springVersion}"
+    implementation "org.springframework:spring-jdbc:${springVersion}"
+    implementation "org.springframework.data:spring-data-jdbc:${springDataVersion}"
+    runtimeOnly "com.h2database:h2:${h2Version}"
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
@@ -32,5 +70,5 @@ test {
 }
 
 application {
-    mainClass = 'com.esdc.lab2.Main'
+    mainClass = 'com.esdc.lab3.MainAnnotation'
 }

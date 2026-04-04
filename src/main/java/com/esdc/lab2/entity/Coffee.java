@@ -1,8 +1,10 @@
 package com.esdc.lab2.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class Coffee {
     private Long id;
     private String name;
