@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Espresso",
+    "id": 1,
+    "price": 2.50,
+    "description": "Strong and bold coffee shot",
+    "date": "13-04-2026"
+  },
+  {
+    "name": "Latte",
+    "id": 2,
+    "price": 3.50,
+    "description": "Smooth blend of espresso and steamed milk",
+    "date": "13-04-2026"
+  },
+  {
+    "name": "Cappuccino",
+    "id": 3,
+    "price": 3.00,
+    "description": "Espresso with frothy milk foam",
+    "date": "13-04-2026"
+  },
+  {
+    "name": "Mocha",
+    "id": 4,
+    "price": 4.00,
+    "description": "Chocolate-flavored coffee drink",
+    "date": "13-04-2026"
+  }
+]

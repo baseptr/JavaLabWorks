@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'application'
+}
+
+application {
+    mainClass = 'MainAnnotation'
+}
+
+group = 'com.esdc'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework:spring-core:${rootProject.ext.springVersion}"
+    implementation "org.springframework:spring-context:${rootProject.ext.springVersion}"
+    implementation "org.springframework:spring-beans:${rootProject.ext.springVersion}"
+    implementation "org.springframework.data:spring-data-jdbc:${rootProject.ext.springDataVersion}"
+    implementation "org.springframework:spring-jdbc:${rootProject.ext.springVersion}"
+    implementation "org.springframework:spring-webmvc:${rootProject.ext.springVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${rootProject.ext.jacksonVersion}"
+    implementation "org.slf4j:slf4j-api:${rootProject.ext.slf4jVersion}"
+    implementation "ch.qos.logback:logback-classic:${rootProject.ext.logbackVersion}"
+    implementation "jakarta.servlet:jakarta.servlet-api:${rootProject.ext.jakartaVersion}"
+    implementation "org.apache.tomcat.embed:tomcat-embed-core:${rootProject.ext.tomcatEmbedVersion}"
+
+    runtimeOnly "com.h2database:h2:${rootProject.ext.h2Version}"
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
