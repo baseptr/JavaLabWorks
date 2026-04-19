@@ -19,6 +19,9 @@ ext {
     mockitoVersion = '5.23.0'
     jakartaVersion = '6.1.0'
     tomcatEmbedVersion = '11.0.21'
+    jakartaValidationVersion = '3.0.2'
+    hibernateValidatorVersion = '8.0.1.Final'
+    springdocVersion = '3.0.2'
 }
 
 repositories {
