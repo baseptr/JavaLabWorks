@@ -7,16 +7,19 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import service.CurrencyService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("/currencies")
 @AllArgsConstructor
+@Slf4j
 public class CurrencyController {
 
     private final CurrencyService currencyService;
@@ -27,8 +30,12 @@ public class CurrencyController {
             @ApiResponse(responseCode = "500", description = "Storage is empty")
     })
     @GetMapping
-    public ResponseEntity<List<Currency>> getAll() {
-        return ResponseEntity.ok(currencyService.getAll());
+    public ResponseEntity<wrapper.ApiResponse<List<Currency>>> getAll(
+            @RequestParam(required = false, defaultValue = "0") Integer limit,
+            @Parameter(description = "Request identifier") @RequestHeader(value = "X-Request-Id", required = false) String requestId) {
+        log.info("getAll called, requestId={}", requestId);
+        List<Currency> curs = currencyService.getAll(limit);
+        return ResponseEntity.ok(new wrapper.ApiResponse<>(curs,curs.size(), LocalDateTime.now()));
     }
 
     @Operation(summary = "Get rate by currency code")

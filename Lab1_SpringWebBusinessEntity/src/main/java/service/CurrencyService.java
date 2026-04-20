@@ -4,12 +4,14 @@ import entity.Currency;
 import exception.CurrencyAlreadyExistsException;
 import exception.CurrencyStorageEmptyException;
 import exception.CurrencyStorageNoSuchTypeException;
+import exception.RandomDeleteException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import repository.CurrencyRepository;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 @AllArgsConstructor
@@ -17,14 +19,15 @@ import java.util.List;
 public class CurrencyService {
 
     private final CurrencyRepository currencyRepository;
+    private final Random rand = new Random();
 
-    public List<Currency> getAll() {
+    public List<Currency> getAll(Integer limit) {
         List<Currency> all = currencyRepository.findAll();
         if (all.isEmpty()) {
             log.warn("No currencies in storage");
             throw new CurrencyStorageEmptyException("No currencies found");
         }
-        return all;
+        return (limit == 0) ? all : all.stream().limit(limit).toList();
     }
 
     public Double getByType(String curType) {
@@ -56,7 +59,11 @@ public class CurrencyService {
             log.warn("Attempt to delete non-existent currency: {}", curType);
             throw new CurrencyStorageNoSuchTypeException("No such type of currency: " + curType);
         }
-        currencyRepository.delete(curType);
-        log.info("Currency deleted: {}", curType);
+        if (rand.nextBoolean()) {
+            throw new RandomDeleteException("Rand delete ex");
+        } else {
+            currencyRepository.delete(curType);
+            log.info("Currency deleted: {}", curType);
+        }
     }
 }

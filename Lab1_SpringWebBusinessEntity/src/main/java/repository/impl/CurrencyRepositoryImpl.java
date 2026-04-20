@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public class CurrencyRepositoryImpl implements CurrencyRepository {
-    private List<Currency> currencies = new ArrayList<>();
+    private final List<Currency> currencies = new ArrayList<>();
 
     @Override
     public List<Currency> findAll() {
@@ -41,9 +41,7 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
 
     @Override
     public void delete(String curType) {
-       currencies = currencies.stream()
-               .filter(c -> !c.getType().equals(curType))
-               .toList();
+       currencies.removeIf(c -> c.getType().equals(curType));
 
     }
 
