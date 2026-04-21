@@ -29,10 +29,7 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${rootProject.ext.lombokVersion}"
     implementation "org.slf4j:slf4j-api:${rootProject.ext.slf4jVersion}"
     implementation "ch.qos.logback:logback-classic:${rootProject.ext.logbackVersion}"
-    testImplementation "org.junit.jupiter:junit-jupiter:${rootProject.ext.junitVersion}"
-    testImplementation "org.mockito:mockito-core:${rootProject.ext.mockitoVersion}"
-    testImplementation "org.mockito:mockito-junit-jupiter:${rootProject.ext.mockitoVersion}"
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 }
 
 compileJava {
