@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: lab2-spring-boot
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      pool-name: lab2-pool
+    url: jdbc:postgresql://localhost:5432/lab2
+    username: lab2
+    password: lab2
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+  profiles:
+    active: jdbctemplate #default/ jdbc / jdbcclient / jdbctemplate
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    url: /v3/api-docs
+    disable-swagger-default-url: true
+
+book:
+  default-genre: "Romance"
+  default-author: "Tolstoy"
+  default-title: "War and peace"
+  default-isbn: "1234567891234"
+  default-price: 100.14
+  default-pub-year: 1867
+

@@ -59,4 +59,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
     }
 
+    @ExceptionHandler(LibraryNotFoundException.class)
+    public ResponseEntity<String> handleLibraryNotFound(LibraryNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(LibraryStorageEmptyException.class)
+    public ResponseEntity<String> handleLibraryStorageEmpty(LibraryStorageEmptyException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
 }

@@ -1,19 +1,20 @@
-package service;
+package com.esdc.service;
 
-import dto.BookRequest;
-import entity.Book;
-import entity.Library;
-import exception.BookAlreadyExistException;
-import exception.BookNotFoundException;
-import exception.BookStorageEmptyException;
-import exception.LibraryNotFoundException;
+import com.esdc.config.BookStorageConfig;
+import com.esdc.dto.BookRequest;
+import com.esdc.entity.Book;
+import com.esdc.entity.Library;
+import com.esdc.exception.BookAlreadyExistException;
+import com.esdc.exception.BookNotFoundException;
+import com.esdc.exception.LibraryNotFoundException;
+import com.esdc.repository.BookRepository;
+import com.esdc.repository.LibraryRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import repository.BookRepository;
-import repository.LibraryRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,13 +23,10 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final LibraryRepository libraryRepository;
+    private final BookStorageConfig defaults;
 
     public List<Book> getAll() {
-        List<Book> books = bookRepository.findAll();
-        if (books.isEmpty()) {
-            throw new BookStorageEmptyException("No books in storage");
-        }
-        return books;
+        return bookRepository.findAll();
     }
 
     public Book getById(Long id) {
@@ -36,29 +34,31 @@ public class BookService {
                 .orElseThrow(() -> new BookNotFoundException("Book not found: " + id));
     }
 
-    public void create(BookRequest request) {
+    public String create(BookRequest request) {
         Library library = request.libraryId() != null
                 ? libraryRepository.findById(request.libraryId())
                         .orElseThrow(() -> new LibraryNotFoundException("Library not found: " + request.libraryId()))
                 : libraryRepository.getDefault();
 
+        String isbn = Optional.ofNullable(request.isbn()).orElse(defaults.getDefaultIsbn());
         boolean alreadyInLibrary = library.getBooks().stream()
-                .anyMatch(b -> b.getIsbn().equals(request.isbn()));
+                .anyMatch(b -> b.getIsbn().equals(isbn));
         if (alreadyInLibrary) {
-            throw new BookAlreadyExistException("Book with ISBN " + request.isbn() + " already exists in library " + library.getId());
+            throw new BookAlreadyExistException("Book with ISBN " + isbn + " already exists in library " + library.getId());
         }
 
         Book book = Book.builder()
-                .title(request.title())
-                .author(request.author())
-                .isbn(request.isbn())
-                .price(request.price())
-                .genre(request.genre())
-                .publishYear(request.publishYear())
+                .title(Optional.ofNullable(request.title()).orElse(defaults.getDefaultTitle()))
+                .author(Optional.ofNullable(request.author()).orElse(defaults.getDefaultAuthor()))
+                .isbn(isbn)
+                .price(Optional.ofNullable(request.price()).orElse(defaults.getDefaultPrice()))
+                .genre(Optional.ofNullable(request.genre()).orElse(defaults.getDefaultGenre()))
+                .publishYear(Optional.ofNullable(request.publishYear()).orElse(defaults.getDefaultPubYear()))
+                .libraryId(library.getId())
                 .build();
         bookRepository.create(book);
-        library.getBooks().add(book);
-        log.info("Created book with ISBN {} in library {}", request.isbn(), library.getId());
+        log.info("Created book with ISBN {} in library {}", isbn, library.getId());
+        return defaults.getMessage();
     }
 
     public void update(Long id, BookRequest request) {

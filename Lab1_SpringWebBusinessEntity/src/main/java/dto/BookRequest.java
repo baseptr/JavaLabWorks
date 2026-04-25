@@ -8,8 +8,9 @@ import jakarta.validation.constraints.Pattern;
 
 public record BookRequest(@NotBlank String title,
                           @NotBlank String author,
-                          @ValidIsbn String  isbn,
+                          @ValidIsbn String isbn,
                           @Min(1) Double price,
                           @NotBlank String genre,
-                          @Max(2026) @Min(1000) int publishYear) {
+                          @Max(2026) @Min(1000) int publishYear,
+                          Long libraryId) {
 }

@@ -1,0 +1,50 @@
+package com.esdc.controller;
+
+import com.esdc.dto.BookRequest;
+import com.esdc.entity.Book;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import com.esdc.service.BookService;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/books")
+@AllArgsConstructor
+@Validated
+public class BookController {
+
+    private final BookService bookService;
+
+    @GetMapping
+    public ResponseEntity<List<Book>> getAll() {
+        return ResponseEntity.ok(bookService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> getById(@PathVariable @Positive Long id) {
+        return ResponseEntity.ok(bookService.getById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<String> create(@RequestBody @Valid BookRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookService.create(request));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid BookRequest request) {
+        bookService.update(id, request);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        bookService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+}
