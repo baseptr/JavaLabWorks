@@ -1,3 +1,2 @@
 rootProject.name = 'JavaLabWorks'
-include 'Lab1_SpringWebBusinessEntity'
-//include 'Lab2_SpringBoot'
+include 'Lab3_Hibernate_SpringData'

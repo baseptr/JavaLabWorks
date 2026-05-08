@@ -10,9 +10,9 @@ spring:
     hikari:
       maximum-pool-size: 10
       minimum-idle: 2
-      connection-timeout: 30000
-      idle-timeout: 600000
-      max-lifetime: 1800000
+      connection-timeout: 30000 #30 sec
+      idle-timeout: 600000 #10 min
+      max-lifetime: 1800000 #30 min
       pool-name: lab2-pool
     url: jdbc:postgresql://localhost:5432/lab2
     username: lab2
@@ -29,12 +29,16 @@ management:
     web:
       exposure:
         include: health,info
+  endpoint:
+    health:
+      show-details: always
 
 springdoc:
   show-actuator: true
   swagger-ui:
     url: /v3/api-docs
     disable-swagger-default-url: true
+
 
 book:
   default-genre: "Romance"

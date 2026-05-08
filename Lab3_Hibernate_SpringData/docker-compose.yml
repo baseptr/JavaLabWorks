@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres-lab3
+    environment:
+      POSTGRES_DB: lab3
+      POSTGRES_USER: lab3
+      POSTGRES_PASSWORD: lab3
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_lab3_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_lab3_data:
