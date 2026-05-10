@@ -1,5 +1,10 @@
 plugins {
     id 'java'
+    id 'application'
+}
+
+application {
+    mainClass = 'Main'
 }
 
 group = 'com.esdc'
@@ -10,9 +15,29 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation "org.springframework:spring-webmvc:${rootProject.ext.springVersion}"
+    implementation "org.springframework:spring-context:${rootProject.ext.springVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${rootProject.ext.jacksonVersion}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${rootProject.ext.jacksonVersion}"
+    implementation "jakarta.servlet:jakarta.servlet-api:${rootProject.ext.jakartaVersion}"
+    implementation "org.apache.tomcat.embed:tomcat-embed-core:${rootProject.ext.tomcatEmbedVersion}"
+    implementation "org.apache.tomcat.embed:tomcat-embed-el:${rootProject.ext.tomcatEmbedVersion}"
+    implementation "jakarta.validation:jakarta.validation-api:${rootProject.ext.jakartaValidationVersion}"
+    implementation "org.hibernate.validator:hibernate-validator:${rootProject.ext.hibernateValidatorVersion}"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${rootProject.ext.springdocVersion}"
+    compileOnly "org.projectlombok:lombok:${rootProject.ext.lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${rootProject.ext.lombokVersion}"
+    implementation "org.slf4j:slf4j-api:${rootProject.ext.slf4jVersion}"
+    implementation "ch.qos.logback:logback-classic:${rootProject.ext.logbackVersion}"
+    implementation "org.springframework.security:spring-security-web:${rootProject.ext.springSecurityVersion}"
+    implementation "org.springframework.security:spring-security-config:${rootProject.ext.springSecurityVersion}"
+    implementation "io.jsonwebtoken:jjwt-api:${rootProject.ext.jjwtVersion}"
+    runtimeOnly "io.jsonwebtoken:jjwt-impl:${rootProject.ext.jjwtVersion}"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson:${rootProject.ext.jjwtVersion}"
+}
+
+compileJava {
+    options.compilerArgs << '-parameters'
 }
 
 test {

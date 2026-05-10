@@ -22,6 +22,8 @@ ext {
     jakartaValidationVersion = '3.0.2'
     hibernateValidatorVersion = '8.0.1.Final'
     springdocVersion = '3.0.2'
+    springSecurityVersion = '6.5.7'
+    jjwtVersion = '0.13.0'
 }
 
 repositories {
