@@ -10,6 +10,7 @@ out/
 !**/src/test/**/out/
 .kotlin
 src/main/resources/app.properties
+tomcat.8080
 
 
 
