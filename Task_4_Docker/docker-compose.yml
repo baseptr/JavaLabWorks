@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:18.2
+    container_name: task4_db
+    environment:
+      POSTGRES_DB: task4
+      POSTGRES_USER: task4
+      POSTGRES_PASSWORD: task4
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_task4:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U task4 -d task4"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    container_name: app_task4
+    build:
+      context: ..
+      dockerfile: Task_4_Docker/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: db
+      DB_NAME: task4
+      DB_USER: task4
+      DB_PASS: task4
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  pg_task4:

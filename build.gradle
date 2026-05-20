@@ -21,7 +21,7 @@ ext {
     tomcatEmbedVersion = '11.0.21'
     jakartaValidationVersion = '3.0.2'
     hibernateValidatorVersion = '8.0.1.Final'
-    springdocVersion = '3.0.2'
+    springdocVersion = '2.8.8'
     springSecurityVersion = '6.5.7'
     jjwtVersion = '0.13.0'
 }

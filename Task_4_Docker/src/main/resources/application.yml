@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: task4
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_NAME:task4}
+    username: ${DB_USER:task4}
+    password: ${DB_PASS:task4}
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+server:
+  port: 8080
+
+jwt:
+  secret:
+    access: kjdlgjsljjjskljlskfj;jhkjsjehsehkjehkjhhhhfdhdjfhjdfhkhdfh
+    refresh: hjhsfhgkhsh7suehwkhkjsdbbjxjnnweuh;ajbsjautuxhnrjfzuh
+  lifetime:
+    access: 15 #minutes
+    refresh: 1 #hours
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
