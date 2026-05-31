@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: lab4
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    consume-timeout: 3000
+
+server:
+  port: 8080
+
+telegram:
+  bot-token:
+
+

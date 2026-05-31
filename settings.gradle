@@ -1,2 +1,2 @@
 rootProject.name = 'JavaLabWorks'
-include 'Task_4_Docker'
+include 'Lab4_REST_RabbitMQ'
