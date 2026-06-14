@@ -12,6 +12,6 @@ server:
   port: 8080
 
 telegram:
-  bot-token:
+  bot-token: 8067212094:AAFicN6pqwkRJmsNWzuXSI935naC9PTlewU
 
 

@@ -1,0 +1,15 @@
+subprojects {
+    apply plugin: 'java'
+
+    group = 'com.esdc'
+    version = '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+
+    java {
+        sourceCompatibility = '25'
+        targetCompatibility = '25'
+    }
+}

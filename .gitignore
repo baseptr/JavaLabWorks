@@ -11,6 +11,10 @@ out/
 .kotlin
 src/main/resources/app.properties
 tomcat.8080
+.env
+FinalProject/ROADMAP.md
+FinalProject/TESTING.md
+FinalProject/README.md
 
 
 
